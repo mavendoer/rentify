@@ -1,0 +1,1530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rentify - Rent the Simple Way | Direction 2: Clean & Sophisticated</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;800&family=Rubik:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #10BC7D;
+            --primary-light: #4BE7A3;
+            --dark: #030712;
+            --gray: #6B7280;
+            --light: #F3F4F6;
+            --white: #FFFFFF;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 400;
+            color: var(--dark);
+            background-color: var(--white);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container {
+            width: 960px;
+            margin: 0 auto;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Rubik', sans-serif;
+            font-weight: 800;
+            line-height: 1.1;
+        }
+
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px 40px;
+            background-color: var(--primary-light);
+            color: var(--dark);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 800;
+            font-size: 15px;
+            text-decoration: none;
+            border-radius: 100px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 14px 32px;
+            background-color: var(--dark);
+            color: var(--white);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 800;
+            font-size: 14px;
+            text-decoration: none;
+            border-radius: 100px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            background-color: #1a1f2e;
+        }
+
+        /* ==================== HEADER ==================== */
+        .header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+        }
+
+        .header-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 80px;
+        }
+
+        .logo img {
+            height: 32px;
+        }
+
+        .nav {
+            display: flex;
+            align-items: center;
+            gap: 48px;
+        }
+
+        .nav a {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 500;
+            font-size: 14px;
+            color: var(--gray);
+            text-decoration: none;
+            transition: color 0.2s ease;
+            letter-spacing: -0.01em;
+        }
+
+        .nav a:hover,
+        .nav a.active {
+            color: var(--dark);
+        }
+
+        /* ==================== HERO ==================== */
+        .hero {
+            padding: 100px 0 120px;
+            background: var(--white);
+            overflow: hidden;
+        }
+
+        .hero-layout {
+            display: grid;
+            grid-template-columns: 420px 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .hero-content {
+            padding-right: 20px;
+        }
+
+        .hero h1 {
+            font-size: 56px;
+            letter-spacing: -0.03em;
+            margin-bottom: 24px;
+            color: var(--dark);
+        }
+
+        .hero-subhead {
+            font-size: 18px;
+            color: var(--gray);
+            line-height: 1.7;
+            margin-bottom: 40px;
+            max-width: 360px;
+        }
+
+        .hero-cta {
+            margin-bottom: 56px;
+        }
+
+        .hero-highlights {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .hero-highlight {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            font-size: 14px;
+            color: var(--dark);
+            line-height: 1.5;
+        }
+
+        .hero-highlight-icon {
+            width: 20px;
+            height: 20px;
+            min-width: 20px;
+            background: var(--primary-light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 2px;
+        }
+
+        .hero-highlight-icon svg {
+            width: 10px;
+            height: 10px;
+            stroke: var(--dark);
+            stroke-width: 3;
+        }
+
+        .hero-devices {
+            position: relative;
+            height: 560px;
+        }
+
+        .hero-phone {
+            position: absolute;
+            width: 220px;
+            background: var(--dark);
+            border-radius: 36px;
+            padding: 8px;
+            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.15), 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .hero-phone-screen {
+            background: var(--white);
+            border-radius: 28px;
+            height: 440px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-phone:nth-child(1) {
+            left: 0;
+            top: 60px;
+            z-index: 1;
+        }
+
+        .hero-phone:nth-child(2) {
+            left: 140px;
+            top: 20px;
+            z-index: 2;
+        }
+
+        .hero-phone:nth-child(3) {
+            left: 280px;
+            top: 80px;
+            z-index: 1;
+        }
+
+        /* ==================== RENTIFY PAY ==================== */
+        .rentify-pay {
+            padding: 140px 0;
+            background: var(--light);
+        }
+
+        .rentify-pay-layout {
+            display: grid;
+            grid-template-columns: 1fr 340px;
+            gap: 100px;
+            align-items: center;
+        }
+
+        .rentify-pay-content {
+            max-width: 480px;
+        }
+
+        .rentify-pay h2 {
+            font-size: 48px;
+            letter-spacing: -0.03em;
+            margin-bottom: 20px;
+        }
+
+        .powered-by {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 32px;
+        }
+
+        .powered-by span {
+            font-size: 13px;
+            color: var(--gray);
+            font-weight: 500;
+        }
+
+        .powered-by img {
+            height: 20px;
+        }
+
+        .tagline {
+            font-family: 'Rubik', sans-serif;
+            font-weight: 700;
+            font-size: 18px;
+            color: var(--primary);
+            margin-bottom: 24px;
+        }
+
+        .rentify-pay-body {
+            font-size: 16px;
+            color: var(--gray);
+            line-height: 1.8;
+            margin-bottom: 40px;
+        }
+
+        .rentify-pay-device {
+            display: flex;
+            justify-content: center;
+        }
+
+        .pay-phone {
+            width: 280px;
+            background: var(--dark);
+            border-radius: 44px;
+            padding: 10px;
+            box-shadow: 0 60px 120px rgba(0, 0, 0, 0.12);
+        }
+
+        .pay-phone-screen {
+            background: var(--white);
+            border-radius: 34px;
+            height: 560px;
+        }
+
+        /* ==================== CUSTOM PATH ==================== */
+        .custom-path {
+            padding: 140px 0;
+            background: var(--white);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-header h2 {
+            font-size: 44px;
+            letter-spacing: -0.03em;
+            margin-bottom: 32px;
+        }
+
+        .path-selector {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+        }
+
+        .path-selector-label {
+            font-size: 16px;
+            color: var(--gray);
+            font-weight: 500;
+        }
+
+        .path-options {
+            display: flex;
+            gap: 8px;
+        }
+
+        .path-option {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 24px;
+            background: var(--light);
+            border-radius: 100px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .path-option.active {
+            background: var(--primary-light);
+        }
+
+        .path-option-radio {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            border: 2px solid var(--gray);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .path-option.active .path-option-radio {
+            border-color: var(--dark);
+        }
+
+        .path-option.active .path-option-radio::after {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: var(--dark);
+            border-radius: 50%;
+        }
+
+        .path-option-text {
+            font-weight: 600;
+            font-size: 14px;
+            color: var(--dark);
+        }
+
+        .paths-container {
+            display: flex;
+            flex-direction: column;
+            gap: 80px;
+        }
+
+        .path-section {
+            background: var(--light);
+            border-radius: 28px;
+            padding: 60px;
+        }
+
+        .path-section-header {
+            margin-bottom: 40px;
+        }
+
+        .path-label {
+            display: inline-block;
+            padding: 8px 16px;
+            background: var(--primary-light);
+            color: var(--dark);
+            font-weight: 700;
+            font-size: 12px;
+            border-radius: 100px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .path-section h3 {
+            font-size: 28px;
+            letter-spacing: -0.02em;
+            margin-bottom: 16px;
+        }
+
+        .path-section-intro {
+            font-size: 15px;
+            color: var(--gray);
+            max-width: 560px;
+        }
+
+        .tenant-options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 48px;
+        }
+
+        .tenant-option {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 18px 24px;
+            background: var(--white);
+            border-radius: 16px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .tenant-option:hover {
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+        }
+
+        .tenant-option-radio {
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            border: 2px solid #D1D5DB;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .tenant-option.active .tenant-option-radio {
+            border-color: var(--primary);
+        }
+
+        .tenant-option.active .tenant-option-radio::after {
+            content: '';
+            width: 10px;
+            height: 10px;
+            background: var(--primary);
+            border-radius: 50%;
+        }
+
+        .tenant-option-text {
+            font-size: 15px;
+            font-weight: 500;
+        }
+
+        .how-it-works-title {
+            font-family: 'Rubik', sans-serif;
+            font-weight: 700;
+            font-size: 20px;
+            margin-bottom: 32px;
+            color: var(--dark);
+        }
+
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+            margin-bottom: 32px;
+        }
+
+        .step {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 28px 24px;
+        }
+
+        .step-number {
+            width: 36px;
+            height: 36px;
+            background: var(--primary-light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Rubik', sans-serif;
+            font-weight: 800;
+            font-size: 14px;
+            color: var(--dark);
+            margin-bottom: 16px;
+        }
+
+        .step h4 {
+            font-size: 15px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            letter-spacing: -0.01em;
+        }
+
+        .step p {
+            font-size: 13px;
+            color: var(--gray);
+            line-height: 1.6;
+        }
+
+        .step-list {
+            list-style: none;
+            font-size: 12px;
+            color: var(--gray);
+            line-height: 1.7;
+        }
+
+        .step-list li {
+            position: relative;
+            padding-left: 12px;
+        }
+
+        .step-list li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 8px;
+            width: 4px;
+            height: 4px;
+            background: var(--primary);
+            border-radius: 50%;
+        }
+
+        .bonus-card {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            border-radius: 16px;
+            padding: 24px 28px;
+            color: var(--dark);
+        }
+
+        .bonus-card p {
+            font-size: 14px;
+            font-weight: 500;
+            line-height: 1.6;
+        }
+
+        .landlord-intro {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 32px;
+            margin-bottom: 40px;
+        }
+
+        .landlord-intro h4 {
+            font-size: 18px;
+            margin-bottom: 8px;
+        }
+
+        .landlord-intro p {
+            font-size: 14px;
+            color: var(--gray);
+            line-height: 1.7;
+        }
+
+        .landlord-conclusion {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 24px 28px;
+            font-size: 14px;
+            color: var(--gray);
+            line-height: 1.7;
+        }
+
+        /* ==================== REWARDS ==================== */
+        .rewards {
+            padding: 140px 0;
+            background: var(--dark);
+            color: var(--white);
+        }
+
+        .rewards-header {
+            max-width: 600px;
+            margin-bottom: 80px;
+        }
+
+        .rewards h2 {
+            font-size: 48px;
+            letter-spacing: -0.03em;
+            margin-bottom: 24px;
+        }
+
+        .rewards-intro {
+            font-size: 17px;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.8;
+        }
+
+        .rewards-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-bottom: 48px;
+        }
+
+        .reward-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 24px;
+            padding: 36px 28px;
+        }
+
+        .reward-card-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--primary-light);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 24px;
+        }
+
+        .reward-card-icon svg {
+            width: 24px;
+            height: 24px;
+            stroke: var(--dark);
+        }
+
+        .reward-card h4 {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .reward-card p {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.6);
+            line-height: 1.6;
+        }
+
+        .rewards-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-top: 48px;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .rewards-footer p {
+            font-size: 15px;
+            color: rgba(255, 255, 255, 0.6);
+            max-width: 500px;
+        }
+
+        /* ==================== TRUST CENTRE ==================== */
+        .trust {
+            padding: 140px 0;
+            background: var(--white);
+        }
+
+        .trust-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+
+        .trust-card {
+            padding: 0;
+        }
+
+        .trust-card h3 {
+            font-size: 20px;
+            letter-spacing: -0.02em;
+            margin-bottom: 14px;
+        }
+
+        .trust-card p {
+            font-size: 14px;
+            color: var(--gray);
+            line-height: 1.7;
+            margin-bottom: 24px;
+        }
+
+        .trust-logos {
+            display: flex;
+            gap: 12px;
+        }
+
+        .logo-placeholder {
+            width: 80px;
+            height: 40px;
+            background: #E5E7EB;
+            border: 1px solid #D1D5DB;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            color: var(--gray);
+            font-weight: 500;
+        }
+
+        .trust-cta {
+            text-align: center;
+        }
+
+        /* ==================== PARTNERS ==================== */
+        .partners {
+            padding: 140px 0;
+            background: var(--light);
+        }
+
+        .partners-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 60px;
+            margin-bottom: 60px;
+        }
+
+        .partner-block h3 {
+            font-size: 22px;
+            letter-spacing: -0.02em;
+            margin-bottom: 14px;
+        }
+
+        .partner-block p {
+            font-size: 14px;
+            color: var(--gray);
+            line-height: 1.7;
+            margin-bottom: 28px;
+        }
+
+        .partner-logos {
+            display: flex;
+            gap: 16px;
+        }
+
+        .partner-logo {
+            width: 100px;
+            height: 50px;
+            background: var(--white);
+            border: 1px solid #E5E7EB;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            color: var(--gray);
+            font-weight: 500;
+        }
+
+        .partners-cta {
+            text-align: center;
+        }
+
+        /* ==================== ABOUT ==================== */
+        .about {
+            padding: 140px 0;
+            background: var(--white);
+        }
+
+        .about-layout {
+            display: grid;
+            grid-template-columns: 380px 1fr;
+            gap: 80px;
+            align-items: start;
+        }
+
+        .about-content h2 {
+            font-size: 40px;
+            letter-spacing: -0.03em;
+            margin-bottom: 28px;
+        }
+
+        .about-content p {
+            font-size: 16px;
+            color: var(--gray);
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .about-image {
+            border-radius: 24px;
+            overflow: hidden;
+            aspect-ratio: 4/3;
+        }
+
+        .about-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* ==================== HELP ==================== */
+        .help {
+            padding: 140px 0;
+            background: var(--light);
+        }
+
+        .help-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .help-header h2 {
+            font-size: 40px;
+            letter-spacing: -0.03em;
+        }
+
+        .help-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 28px;
+        }
+
+        .help-card {
+            background: var(--white);
+            border-radius: 24px;
+            padding: 40px 32px;
+            text-align: center;
+        }
+
+        .help-card-icon {
+            width: 72px;
+            height: 72px;
+            margin: 0 auto 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .help-card-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
+        .help-card-icon svg {
+            width: 36px;
+            height: 36px;
+            stroke: var(--primary);
+        }
+
+        .help-card h3 {
+            font-size: 18px;
+            margin-bottom: 12px;
+        }
+
+        .help-card p {
+            font-size: 14px;
+            color: var(--gray);
+            line-height: 1.6;
+            margin-bottom: 24px;
+        }
+
+        .help-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 48px;
+            height: 48px;
+            background: var(--light);
+            border-radius: 50%;
+            transition: all 0.2s ease;
+        }
+
+        .help-btn:hover {
+            background: var(--primary-light);
+        }
+
+        .help-btn svg {
+            width: 20px;
+            height: 20px;
+            stroke: var(--dark);
+        }
+
+        /* ==================== DOWNLOAD APP ==================== */
+        .download {
+            padding: 140px 0;
+            background: var(--white);
+        }
+
+        .download-layout {
+            display: grid;
+            grid-template-columns: 1fr 320px;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .download-content h2 {
+            font-size: 48px;
+            letter-spacing: -0.03em;
+            margin-bottom: 20px;
+        }
+
+        .download-content p {
+            font-size: 17px;
+            color: var(--gray);
+            line-height: 1.7;
+            margin-bottom: 12px;
+        }
+
+        .download-platform {
+            font-size: 14px;
+            color: var(--gray);
+            margin-bottom: 36px;
+        }
+
+        .download-buttons {
+            display: flex;
+            gap: 16px;
+        }
+
+        .store-btn {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 24px;
+            background: var(--dark);
+            color: var(--white);
+            text-decoration: none;
+            border-radius: 14px;
+            transition: all 0.2s ease;
+        }
+
+        .store-btn:hover {
+            background: #1a1f2e;
+        }
+
+        .store-btn svg {
+            width: 24px;
+            height: 24px;
+            fill: var(--white);
+        }
+
+        .store-btn-text {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .store-btn-text span:first-child {
+            font-size: 10px;
+            opacity: 0.7;
+        }
+
+        .store-btn-text span:last-child {
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        .download-device {
+            display: flex;
+            justify-content: center;
+        }
+
+        .download-phone {
+            width: 260px;
+            background: var(--dark);
+            border-radius: 40px;
+            padding: 10px;
+            box-shadow: 0 60px 120px rgba(0, 0, 0, 0.15);
+        }
+
+        .download-phone-screen {
+            background: var(--white);
+            border-radius: 32px;
+            height: 520px;
+        }
+
+        /* ==================== FOOTER ==================== */
+        .footer {
+            padding: 80px 0 40px;
+            background: var(--dark);
+            color: var(--white);
+        }
+
+        .footer-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding-bottom: 60px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            margin-bottom: 40px;
+        }
+
+        .footer-logo img {
+            height: 28px;
+        }
+
+        .footer-nav {
+            display: flex;
+            gap: 48px;
+        }
+
+        .footer-nav a {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.6);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .footer-nav a:hover {
+            color: var(--white);
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 16px;
+        }
+
+        .footer-social a {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
+
+        .footer-social a:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-social svg {
+            width: 18px;
+            height: 18px;
+            fill: var(--white);
+        }
+
+        .footer-bottom {
+            text-align: center;
+        }
+
+        .footer-bottom p {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.4);
+        }
+    </style>
+</head>
+<body>
+    <!-- HEADER -->
+    <header class="header">
+        <div class="container">
+            <div class="header-inner">
+                <a href="#" class="logo">
+                    <img src="assets/logo-on-light.svg" alt="Rentify">
+                </a>
+                <nav class="nav">
+                    <a href="#" class="active">Home</a>
+                    <a href="#">How it Works</a>
+                    <a href="#">Rewards</a>
+                    <a href="#">Why</a>
+                    <a href="#">Help</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-layout">
+                <div class="hero-content">
+                    <h1>Rent the Simple Way</h1>
+                    <p class="hero-subhead">Monthly rent payments, rewards and secure transactions made simple.</p>
+                    <div class="hero-cta">
+                        <a href="#" class="btn-primary">Start Now</a>
+                    </div>
+                    <div class="hero-highlights">
+                        <div class="hero-highlight">
+                            <div class="hero-highlight-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                            </div>
+                            <span>Pay rent monthly with secure, transparent payment options and earn rewards</span>
+                        </div>
+                        <div class="hero-highlight">
+                            <div class="hero-highlight-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                            </div>
+                            <span>Create, renew, and manage rental agreements online</span>
+                        </div>
+                        <div class="hero-highlight">
+                            <div class="hero-highlight-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                            </div>
+                            <span>Instant receipts, reminders, and customer support</span>
+                        </div>
+                        <div class="hero-highlight">
+                            <div class="hero-highlight-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                            </div>
+                            <span>Designed for tenants, landlords, and agents across the rental ecosystem</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-devices">
+                    <div class="hero-phone">
+                        <div class="hero-phone-screen"></div>
+                    </div>
+                    <div class="hero-phone">
+                        <div class="hero-phone-screen"></div>
+                    </div>
+                    <div class="hero-phone">
+                        <div class="hero-phone-screen"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- RENTIFY PAY -->
+    <section class="rentify-pay">
+        <div class="container">
+            <div class="rentify-pay-layout">
+                <div class="rentify-pay-content">
+                    <h2>Rent, On Your Own Terms</h2>
+                    <div class="powered-by">
+                        <span>Powered by</span>
+                        <img src="assets/rentify-pay-logo.svg" alt="Rentify Pay">
+                    </div>
+                    <p class="tagline">No cheques. No stress. No confusion.</p>
+                    <p class="rentify-pay-body">Rentify Pay is built to fit into real life whether you're paying rent, managing a property, or collecting payments. Everything happens in one place, making rent payments smoother, more transparent, and easier to manage for tenants and landlords.</p>
+                    <a href="#" class="btn-primary">Start Now</a>
+                </div>
+                <div class="rentify-pay-device">
+                    <div class="pay-phone">
+                        <div class="pay-phone-screen"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CUSTOM PATH -->
+    <section class="custom-path">
+        <div class="container">
+            <div class="section-header">
+                <h2>Choose Your Journey</h2>
+                <div class="path-selector">
+                    <span class="path-selector-label">I am a:</span>
+                    <div class="path-options">
+                        <div class="path-option active">
+                            <div class="path-option-radio"></div>
+                            <span class="path-option-text">Tenant</span>
+                        </div>
+                        <div class="path-option">
+                            <div class="path-option-radio"></div>
+                            <span class="path-option-text">Landlord</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="paths-container">
+                <!-- Tenant Path -->
+                <div class="path-section">
+                    <div class="path-section-header">
+                        <span class="path-label">Tenant</span>
+                        <h3>What are you looking for?</h3>
+                    </div>
+                    <div class="tenant-options">
+                        <div class="tenant-option active">
+                            <div class="tenant-option-radio"></div>
+                            <span class="tenant-option-text">A new apartment to pay monthly</span>
+                        </div>
+                        <div class="tenant-option">
+                            <div class="tenant-option-radio"></div>
+                            <span class="tenant-option-text">Migrate existing rental to Rentify for monthly payments</span>
+                        </div>
+                        <div class="tenant-option">
+                            <div class="tenant-option-radio"></div>
+                            <span class="tenant-option-text">Convert quarterly or bi-annual cheques to secure digital payments</span>
+                        </div>
+                    </div>
+
+                    <h4 class="how-it-works-title">How it works</h4>
+                    <div class="steps">
+                        <div class="step">
+                            <div class="step-number">1</div>
+                            <h4>Download and Sign Up</h4>
+                            <p>Get the Rentify app and select Tenant.</p>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">2</div>
+                            <h4>Submit Documents</h4>
+                            <ul class="step-list">
+                                <li>Emirates ID</li>
+                                <li>Passport</li>
+                                <li>Salary certificate</li>
+                                <li>3-month bank statement</li>
+                                <li>3 recent salary slips</li>
+                            </ul>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">3</div>
+                            <h4>Get Approved</h4>
+                            <p>Our banking partner reviews your application in 2-3 working days.</p>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">4</div>
+                            <h4>Start Paying Monthly</h4>
+                            <p>Once approved, we coordinate with your landlord. You're all set to pay rent monthly through the app. It's secure, simple, and stress-free.</p>
+                        </div>
+                    </div>
+                    <div class="bonus-card">
+                        <p>Bonus: Get a 100 AED Noon voucher on your first payment + ongoing cashback rewards.</p>
+                    </div>
+                </div>
+
+                <!-- Landlord Path -->
+                <div class="path-section">
+                    <div class="path-section-header">
+                        <span class="path-label">Landlord</span>
+                        <h3>Why Rentify?</h3>
+                    </div>
+                    <div class="landlord-intro">
+                        <h4>Get paid upfront. Zero follow-ups. Full transparency.</h4>
+                        <p>You receive the entire annual rent immediately-while your tenant pays monthly. No changes to your lease, no collection stress.</p>
+                    </div>
+
+                    <h4 class="how-it-works-title">How It Works</h4>
+                    <div class="steps">
+                        <div class="step">
+                            <div class="step-number">1</div>
+                            <h4>Download and Register</h4>
+                            <p>Sign up as a "Landlord" in the Rentify app.</p>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">2</div>
+                            <h4>Add Property Details</h4>
+                            <ul class="step-list">
+                                <li>Emirates ID</li>
+                                <li>Property listing</li>
+                                <li>Title deed</li>
+                                <li>IBAN details</li>
+                            </ul>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">3</div>
+                            <h4>Verify Your Tenant</h4>
+                            <p>Your tenant applies through Rentify with their tenancy agreement and Ejari.</p>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">4</div>
+                            <h4>Get Paid in Full</h4>
+                            <p>Our banking partner deposits the full annual rent directly to your account.</p>
+                        </div>
+                    </div>
+                    <div class="landlord-conclusion">
+                        <p>Done. No monthly chasing. No delays. Just guaranteed rent and complete peace of mind.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- REWARDS -->
+    <section class="rewards">
+        <div class="container">
+            <div class="rewards-header">
+                <h2>Rewards That Add Up</h2>
+                <p class="rewards-intro">Rent is your biggest monthly expense. It should give something back. With Rentify, every rent payment earns you points that can be redeemed across everyday categories from shopping and dining to travel and services.</p>
+            </div>
+            <div class="rewards-grid">
+                <div class="reward-card">
+                    <div class="reward-card-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+                            <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
+                            <line x1="1" y1="10" x2="23" y2="10"></line>
+                        </svg>
+                    </div>
+                    <h4>Pay rent monthly through Rentify</h4>
+                    <p>Every payment you make automatically earns you reward points.</p>
+                </div>
+                <div class="reward-card">
+                    <div class="reward-card-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+                            <circle cx="12" cy="8" r="7"></circle>
+                            <polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline>
+                        </svg>
+                    </div>
+                    <h4>Earn points on every successful payment</h4>
+                    <p>Watch your balance grow with each transaction.</p>
+                </div>
+                <div class="reward-card">
+                    <div class="reward-card-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+                            <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+                            <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+                            <line x1="12" y1="22.08" x2="12" y2="12"></line>
+                        </svg>
+                    </div>
+                    <h4>Redeem rewards from 200+ partner brands</h4>
+                    <p>From shopping and dining to travel and services.</p>
+                </div>
+            </div>
+            <div class="rewards-footer">
+                <p>Rewards are built into the rental experience - no extra steps, no separate apps.</p>
+                <a href="#" class="btn-primary">Start Now</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- TRUST CENTRE -->
+    <section class="trust">
+        <div class="container">
+            <div class="trust-grid">
+                <div class="trust-card">
+                    <h3>Security</h3>
+                    <p>Your data and payments are protected with industry-standard security and encryption.</p>
+                    <div class="trust-logos">
+                        <div class="logo-placeholder">Logo</div>
+                        <div class="logo-placeholder">Logo</div>
+                    </div>
+                </div>
+                <div class="trust-card">
+                    <h3>Compliance and Data Privacy</h3>
+                    <p>We follow local regulations and strict privacy practices to protect your information.</p>
+                </div>
+                <div class="trust-card">
+                    <h3>Insurance and Risk</h3>
+                    <p>Built-in safeguards help protect both tenants and landlords across the rental lifecycle.</p>
+                </div>
+            </div>
+            <div class="trust-cta">
+                <a href="#" class="btn-primary">Start Now</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- PARTNERS -->
+    <section class="partners">
+        <div class="container">
+            <div class="partners-grid">
+                <div class="partner-block">
+                    <h3>Banking & Payments</h3>
+                    <p>Integrated with leading banking and payment partners to support smooth, secure monthly transactions.</p>
+                    <div class="partner-logos">
+                        <div class="partner-logo">Logo</div>
+                        <div class="partner-logo">Logo</div>
+                        <div class="partner-logo">Logo</div>
+                    </div>
+                </div>
+                <div class="partner-block">
+                    <h3>Ecosystem Benefits</h3>
+                    <p>Access value-added services such as registrations, agreements, digital tools, and reward programmes that support the entire rental cycle.</p>
+                </div>
+            </div>
+            <div class="partners-cta">
+                <a href="#" class="btn-primary">Start Now</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="about">
+        <div class="container">
+            <div class="about-layout">
+                <div class="about-content">
+                    <h2>Our Story</h2>
+                    <p>Rentify was built to make renting simpler by replacing fragmented, outdated systems with a secure digital foundation.</p>
+                    <p>We enable monthly rent payments, online agreements, built-in rewards, and fast settlements - creating modern infrastructure for renting at scale.</p>
+                </div>
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&auto=format&fit=crop&q=80" alt="Team at work">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- HELP -->
+    <section class="help">
+        <div class="container">
+            <div class="help-header">
+                <h2>We're Always Here for You</h2>
+            </div>
+            <div class="help-grid">
+                <div class="help-card">
+                    <div class="help-card-icon">
+                        <img src="assets/reni-avatar.png" alt="Reni">
+                    </div>
+                    <h3>Ask Reni</h3>
+                    <p>Your virtual assistant for rent-related questions. Available anytime.</p>
+                </div>
+                <div class="help-card">
+                    <div class="help-card-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5">
+                            <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
+                        </svg>
+                    </div>
+                    <h3>WhatsApp</h3>
+                    <p>Chat instantly with our support team.</p>
+                    <a href="#" class="help-btn">
+                        <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                            <polyline points="12 5 19 12 12 19"></polyline>
+                        </svg>
+                    </a>
+                </div>
+                <div class="help-card">
+                    <div class="help-card-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5">
+                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                            <polyline points="22,6 12,13 2,6"></polyline>
+                        </svg>
+                    </div>
+                    <h3>Email</h3>
+                    <p>Reach out for detailed or account-specific support.</p>
+                    <a href="#" class="help-btn">
+                        <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                            <polyline points="12 5 19 12 12 19"></polyline>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- DOWNLOAD APP -->
+    <section class="download">
+        <div class="container">
+            <div class="download-layout">
+                <div class="download-content">
+                    <h2>Get Started Now</h2>
+                    <p>Manage your rent, agreements, rewards, and support - all in one place.</p>
+                    <p class="download-platform">Available on iOS and Android.</p>
+                    <div class="download-buttons">
+                        <a href="#" class="store-btn">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+                            </svg>
+                            <div class="store-btn-text">
+                                <span>Download on the</span>
+                                <span>App Store</span>
+                            </div>
+                        </a>
+                        <a href="#" class="store-btn">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.6 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 20.53,12.9 20.18,13.18L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z"/>
+                            </svg>
+                            <div class="store-btn-text">
+                                <span>Get it on</span>
+                                <span>Google Play</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="download-device">
+                    <div class="download-phone">
+                        <div class="download-phone-screen"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-top">
+                <a href="#" class="footer-logo">
+                    <img src="assets/logo-on-dark.svg" alt="Rentify">
+                </a>
+                <nav class="footer-nav">
+                    <a href="#">Home</a>
+                    <a href="#">How it Works</a>
+                    <a href="#">Rewards</a>
+                    <a href="#">Why</a>
+                    <a href="#">Help</a>
+                </nav>
+                <div class="footer-social">
+                    <a href="#">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                        </svg>
+                    </a>
+                    <a href="#">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                        </svg>
+                    </a>
+                    <a href="#">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Rentify. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
