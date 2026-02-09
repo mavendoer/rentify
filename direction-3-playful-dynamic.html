@@ -1,0 +1,2585 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rentify - Rent the Simple Way | Direction 3: Playful & Dynamic</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Rubik:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #10BC7D;
+            --primary-light: #4BE7A3;
+            --dark: #030712;
+            --gray: #6B7280;
+            --light: #F3F4F6;
+            --white: #FFFFFF;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 400;
+            color: var(--dark);
+            background: var(--white);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 960px;
+            width: 100%;
+            padding: 0 clamp(1.25rem, 5vw, 2.5rem);
+            margin: 0 auto;
+            position: relative;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Rubik', sans-serif;
+            font-weight: 800;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 16px 36px;
+            background: var(--primary-light);
+            color: var(--dark);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 800;
+            font-size: 16px;
+            text-decoration: none;
+            border-radius: 100px;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 10px 30px rgba(16, 188, 125, 0.3);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--dark);
+            color: var(--dark);
+        }
+
+        /* Decorative elements hidden */
+        .blob,
+        .floating-circle {
+            display: none;
+        }
+
+        .dot-pattern {
+            position: absolute;
+            display: grid;
+            gap: 12px;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .dot-pattern .dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--primary);
+            opacity: 0.3;
+        }
+
+        .floating-icon {
+            position: absolute;
+            font-size: 24px;
+            opacity: 0.6;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Wave Divider */
+        .wave-divider {
+            position: relative;
+            height: 80px;
+            overflow: hidden;
+        }
+
+        .wave-divider svg {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 80px;
+        }
+
+        /* ==================== HEADER ==================== */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(16, 188, 125, 0.1);
+        }
+
+        .header-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px clamp(1.25rem, 5vw, 2.5rem);
+        }
+
+        .logo img {
+            height: 36px;
+        }
+
+        nav {
+            display: flex;
+            gap: 36px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 600;
+            font-size: 15px;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: var(--primary-light);
+            border-radius: 2px;
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover {
+            color: var(--primary);
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* ==================== HERO ==================== */
+        .hero {
+            position: relative;
+            padding: clamp(3rem, 8vw, 5rem) clamp(1.25rem, 5vw, 2.5rem) clamp(4rem, 10vw, 7.5rem);
+            overflow: hidden;
+            background: linear-gradient(180deg, var(--white) 0%, rgba(75, 231, 163, 0.05) 100%);
+        }
+
+        .hero .blob-1 {
+            width: 400px;
+            height: 400px;
+            top: -100px;
+            right: -100px;
+        }
+
+        .hero .blob-2 {
+            width: 300px;
+            height: 300px;
+            bottom: 0;
+            left: -150px;
+        }
+
+        .hero .floating-circle-1 {
+            width: 120px;
+            height: 120px;
+            top: 100px;
+            left: 60px;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .hero .floating-circle-2 {
+            width: 60px;
+            height: 60px;
+            top: 180px;
+            right: 80px;
+            animation: float 4s ease-in-out infinite reverse;
+        }
+
+        .hero .floating-circle-3 {
+            width: 40px;
+            height: 40px;
+            bottom: 150px;
+            left: 120px;
+            background: var(--primary-light);
+            animation: float 5s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+
+        .hero .dot-pattern-1 {
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: repeat(4, 1fr);
+            top: 120px;
+            right: 200px;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            text-align: left;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.25rem, 7vw, 4rem);
+            line-height: 1.1;
+            margin-bottom: 24px;
+            color: var(--dark);
+        }
+
+        .hero-subhead {
+            font-size: clamp(1.125rem, 2.5vw, 1.375rem);
+            color: var(--gray);
+            margin-bottom: 36px;
+            line-height: 1.6;
+        }
+
+        .hero-with-image {
+            display: grid;
+            grid-template-columns: 1fr 280px;
+            gap: 40px;
+            align-items: start;
+            position: relative;
+            z-index: 10;
+        }
+
+        .hero-image-card {
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.12);
+            margin-top: 20px;
+            transform: rotate(2deg);
+            transition: transform 0.4s ease;
+        }
+
+        .hero-image-card:hover {
+            transform: rotate(0deg) scale(1.02);
+        }
+
+        .hero-image-card img {
+            width: 100%;
+            height: 420px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .hero-highlights {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            text-align: left;
+            margin-top: 50px;
+        }
+
+        .highlight-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 16px 20px;
+            background: var(--white);
+            border-radius: 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+
+        .highlight-item:hover {
+            transform: translateY(-4px);
+        }
+
+        .highlight-icon {
+            width: 36px;
+            height: 36px;
+            background: var(--primary-light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .highlight-icon svg {
+            width: 18px;
+            height: 18px;
+            color: var(--dark);
+        }
+
+        .highlight-item p {
+            font-size: 14px;
+            color: var(--dark);
+            line-height: 1.5;
+        }
+
+        /* Phone Mockups */
+        .hero-phones {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            gap: 20px;
+            margin-top: 60px;
+            z-index: 10;
+        }
+
+        .phone-mockup {
+            background: var(--dark);
+            border-radius: 40px;
+            padding: 8px;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.2);
+            transition: transform 0.4s ease;
+        }
+
+        .phone-mockup:hover {
+            transform: translateY(-10px) rotate(2deg);
+        }
+
+        .phone-mockup.center {
+            z-index: 2;
+        }
+
+        .phone-mockup.center:hover {
+            transform: translateY(-15px) scale(1.02);
+        }
+
+        .phone-mockup.left {
+            transform: rotate(-8deg) translateY(20px);
+        }
+
+        .phone-mockup.left:hover {
+            transform: rotate(-5deg) translateY(0px);
+        }
+
+        .phone-mockup.right {
+            transform: rotate(8deg) translateY(20px);
+        }
+
+        .phone-mockup.right:hover {
+            transform: rotate(5deg) translateY(0px);
+        }
+
+        .phone-screen {
+            width: 200px;
+            height: 400px;
+            background: var(--white);
+            border-radius: 32px;
+            overflow: hidden;
+        }
+
+        .phone-mockup.center .phone-screen {
+            width: 240px;
+            height: 480px;
+        }
+
+        /* ==================== RENTIFY PAY ==================== */
+        .rentify-pay {
+            position: relative;
+            padding: clamp(3rem, 8vw, 6.25rem) clamp(1.25rem, 5vw, 2.5rem);
+            background: var(--dark);
+            overflow: hidden;
+        }
+
+        .rentify-pay::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(75, 231, 163, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .rentify-pay .floating-circle {
+            border-color: rgba(75, 231, 163, 0.3);
+        }
+
+        .rentify-pay .fc-1 {
+            width: 200px;
+            height: 200px;
+            top: 50px;
+            left: -50px;
+            animation: float 7s ease-in-out infinite;
+        }
+
+        .rentify-pay .fc-2 {
+            width: 80px;
+            height: 80px;
+            bottom: 100px;
+            right: 100px;
+            background: var(--primary-light);
+            opacity: 0.2;
+            animation: float 5s ease-in-out infinite reverse;
+        }
+
+        .rentify-pay-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+            position: relative;
+            z-index: 10;
+        }
+
+        .rentify-pay-content h2 {
+            font-size: clamp(1.75rem, 5vw, 3rem);
+            color: var(--white);
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .powered-by {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 24px;
+            background: var(--white);
+            padding: 10px 24px;
+            border-radius: 100px;
+        }
+
+        .powered-by h3 {
+            font-size: 14px;
+            color: var(--dark);
+            font-weight: 800;
+        }
+
+        .powered-by img {
+            height: 24px;
+        }
+
+        .tagline {
+            font-size: clamp(1.125rem, 2.5vw, 1.25rem);
+            color: var(--primary-light);
+            font-weight: 700;
+            margin-bottom: 24px;
+        }
+
+        .rentify-pay-content p {
+            font-size: clamp(1rem, 2vw, 1.0625rem);
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.8;
+            margin-bottom: 32px;
+        }
+
+        .rentify-pay-visual {
+            display: flex;
+            justify-content: center;
+            position: relative;
+        }
+
+        .rentify-pay-visual .phone-mockup {
+            transform: rotate(5deg);
+        }
+
+        .rentify-pay-visual .phone-mockup:hover {
+            transform: rotate(0deg) translateY(-10px);
+        }
+
+        .pay-card {
+            position: absolute;
+            background: var(--white);
+            border-radius: 16px;
+            padding: 16px 24px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .pay-card-1 {
+            top: 50px;
+            right: -20px;
+            animation: float 4s ease-in-out infinite;
+        }
+
+        .pay-card-2 {
+            bottom: 80px;
+            left: -40px;
+            animation: float 5s ease-in-out infinite reverse;
+        }
+
+        .pay-card-amount {
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--primary);
+        }
+
+        .pay-card-label {
+            font-size: 12px;
+            color: var(--gray);
+        }
+
+        /* ==================== CUSTOM PATH ==================== */
+        .custom-path {
+            position: relative;
+            padding: clamp(3rem, 8vw, 6.25rem) clamp(1.25rem, 5vw, 2.5rem);
+            overflow: hidden;
+            background: linear-gradient(180deg, var(--white) 0%, rgba(75, 231, 163, 0.08) 50%, var(--white) 100%);
+        }
+
+        .custom-path .blob {
+            width: 500px;
+            height: 500px;
+            top: 20%;
+            left: -200px;
+        }
+
+        .custom-path .dot-pattern {
+            grid-template-columns: repeat(6, 1fr);
+            grid-template-rows: repeat(6, 1fr);
+            top: 50px;
+            right: 50px;
+            opacity: 0.3;
+        }
+
+        .path-header {
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .path-lifestyle-image {
+            border-radius: 24px;
+            overflow: hidden;
+            margin-bottom: 50px;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+            position: relative;
+            z-index: 10;
+        }
+
+        .path-lifestyle-image img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .path-header h2 {
+            font-size: clamp(1.75rem, 5vw, 3rem);
+            margin-bottom: 30px;
+        }
+
+        .path-selector {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .path-selector span {
+            font-size: 18px;
+            color: var(--gray);
+        }
+
+        .selector-options {
+            display: flex;
+            gap: 12px;
+        }
+
+        .selector-option {
+            display: flex;
+            align-items: center;
+            padding: 14px 28px;
+            background: var(--light);
+            border: 2px solid var(--light);
+            border-radius: 100px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .selector-option.active {
+            background: var(--white);
+            border-color: var(--gray);
+        }
+
+        .selector-option:hover {
+            transform: translateY(-2px);
+        }
+
+        .selector-label {
+            font-weight: 700;
+            font-size: 16px;
+            color: var(--dark);
+        }
+
+        /* Path Panels */
+        .path-panels {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .path-panel {
+            background: var(--white);
+            border-radius: 30px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease;
+        }
+
+        .path-panel:hover {
+            transform: translateY(-5px);
+        }
+
+        .path-panel-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 24px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid var(--light);
+        }
+
+        .path-panel-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--primary-light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .path-panel-icon svg {
+            width: 24px;
+            height: 24px;
+            color: var(--dark);
+        }
+
+        .path-panel-header h3 {
+            font-size: clamp(1.25rem, 3vw, 1.5rem);
+        }
+
+        .looking-for {
+            margin-bottom: 30px;
+        }
+
+        .looking-for h4 {
+            font-size: 16px;
+            color: var(--dark);
+            margin-bottom: 16px;
+        }
+
+        .option-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .option-item {
+            display: flex;
+            align-items: center;
+            padding: 14px 18px;
+            background: var(--light);
+            border: 2px solid var(--light);
+            border-radius: 16px;
+            font-size: 14px;
+            color: var(--dark);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .option-item:hover {
+            transform: translateX(5px);
+        }
+
+        .option-item.selected {
+            background: var(--white);
+            border-color: var(--gray);
+        }
+
+        /* How It Works Steps */
+        .how-it-works-mini h4 {
+            font-size: 18px;
+            margin-bottom: 20px;
+            color: var(--dark);
+        }
+
+        .steps-list {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .step-item {
+            display: flex;
+            gap: 16px;
+            align-items: flex-start;
+        }
+
+        .step-number {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: var(--dark);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 14px;
+            flex-shrink: 0;
+        }
+
+        .step-content h5 {
+            font-size: 15px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .step-content p {
+            font-size: 13px;
+            color: var(--gray);
+            line-height: 1.5;
+        }
+
+        .bonus-card {
+            margin-top: 24px;
+            padding: 20px;
+            background: linear-gradient(135deg, rgba(75, 231, 163, 0.15) 0%, rgba(16, 188, 125, 0.1) 100%);
+            border-radius: 20px;
+            border: 2px dashed var(--primary);
+        }
+
+        .bonus-card p {
+            font-size: 14px;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        /* Landlord Panel */
+        .why-rentify {
+            margin-bottom: 24px;
+        }
+
+        .why-rentify h4 {
+            font-size: 18px;
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+
+        .why-rentify p {
+            font-size: 14px;
+            color: var(--gray);
+            line-height: 1.6;
+        }
+
+        .landlord-benefit {
+            padding: 16px 20px;
+            background: var(--light);
+            border-radius: 16px;
+            margin-bottom: 24px;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .done-message {
+            margin-top: 20px;
+            padding: 16px;
+            background: var(--dark);
+            border-radius: 16px;
+            color: var(--white);
+            font-size: 13px;
+            font-weight: 700;
+            text-align: center;
+            line-height: 1.6;
+        }
+
+        /* ==================== REWARDS ==================== */
+        .rewards {
+            position: relative;
+            padding: clamp(3rem, 8vw, 6.25rem) clamp(1.25rem, 5vw, 2.5rem);
+            background: var(--white);
+            overflow: hidden;
+        }
+
+        .rewards::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 100%;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='30' cy='30' r='2' fill='%2310BC7D' fill-opacity='0.08'/%3E%3C/svg%3E");
+            pointer-events: none;
+        }
+
+        .rewards .floating-circle-1 {
+            width: 150px;
+            height: 150px;
+            top: 80px;
+            right: 80px;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .rewards .floating-circle-2 {
+            width: 80px;
+            height: 80px;
+            bottom: 120px;
+            left: 60px;
+            background: var(--primary-light);
+            animation: float 4s ease-in-out infinite reverse;
+        }
+
+        .rewards-header {
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .rewards-header h2 {
+            font-size: clamp(1.75rem, 5vw, 3rem);
+            margin-bottom: 20px;
+        }
+
+        .rewards-header p {
+            font-size: clamp(1rem, 2vw, 1.125rem);
+            color: var(--gray);
+            max-width: 600px;
+            margin: 0 auto 16px;
+            line-height: 1.7;
+        }
+
+        .rewards-lifestyle-image {
+            border-radius: 24px;
+            overflow: hidden;
+            margin-bottom: 50px;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+            position: relative;
+            z-index: 10;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .rewards-lifestyle-image img {
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .rewards-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-bottom: 50px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .reward-card {
+            background: var(--white);
+            border-radius: 24px;
+            padding: 36px 28px;
+            text-align: center;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .reward-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary) 0%, var(--primary-light) 100%);
+        }
+
+        .reward-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 50px rgba(16, 188, 125, 0.15);
+        }
+
+        .reward-icon {
+            width: 70px;
+            height: 70px;
+            background: var(--primary-light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+        }
+
+        .reward-icon svg {
+            width: 32px;
+            height: 32px;
+            color: var(--dark);
+        }
+
+        .reward-card h4 {
+            font-size: 18px;
+            margin-bottom: 12px;
+        }
+
+        .reward-card p {
+            font-size: 14px;
+            color: var(--gray);
+            line-height: 1.6;
+        }
+
+        .rewards-note {
+            text-align: center;
+            padding: 24px 40px;
+            background: var(--light);
+            border-radius: 20px;
+            margin-bottom: 40px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .rewards-note p {
+            font-size: 15px;
+            color: var(--dark);
+        }
+
+        .rewards-cta {
+            text-align: center;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* ==================== FEATURED IN ==================== */
+        .featured-in {
+            padding: clamp(1.5rem, 3vw, 1.875rem) clamp(1.25rem, 5vw, 2.5rem) clamp(3rem, 7vw, 5rem);
+            background: var(--white);
+        }
+
+        .featured-in-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .featured-in-header h2 {
+            font-size: clamp(1.75rem, 5vw, 3rem);
+            margin-bottom: 16px;
+        }
+
+        .featured-in-header p {
+            font-size: clamp(1rem, 2vw, 1.0625rem);
+            color: var(--gray);
+            line-height: 1.7;
+        }
+
+        .featured-in-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 20px;
+        }
+
+        .featured-in-item {
+            background: var(--white);
+            border: 1px solid #E5E7EB;
+            border-radius: 16px;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            aspect-ratio: 1;
+        }
+
+        .featured-in-item img {
+            max-width: 80%;
+            max-height: 70%;
+            object-fit: contain;
+        }
+
+        /* ==================== TRUST CENTRE ==================== */
+        .trust-centre {
+            position: relative;
+            padding: clamp(3rem, 8vw, 6.25rem) clamp(1.25rem, 5vw, 2.5rem);
+            background: var(--dark);
+            overflow: hidden;
+        }
+
+        .trust-centre::before {
+            content: '';
+            position: absolute;
+            bottom: -100px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 800px;
+            height: 400px;
+            background: radial-gradient(ellipse, rgba(75, 231, 163, 0.1) 0%, transparent 70%);
+        }
+
+        .trust-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-bottom: 50px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .trust-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 24px;
+            padding: 36px 28px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s ease, background 0.3s ease;
+        }
+
+        .trust-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .trust-card h3 {
+            font-size: clamp(1.125rem, 2.5vw, 1.25rem);
+            color: var(--white);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            line-height: 1.4;
+        }
+
+        .trust-card h3 svg {
+            width: 24px;
+            height: 24px;
+            min-width: 24px;
+            min-height: 24px;
+            color: var(--primary-light);
+            margin-top: 3px;
+        }
+
+        .trust-card p {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.7;
+            margin-bottom: 24px;
+        }
+
+        .logo-placeholders {
+            display: flex;
+            gap: 12px;
+        }
+
+        .logo-placeholder {
+            width: 80px;
+            height: 36px;
+            background: #E5E7EB;
+            border: 1px solid #D1D5DB;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            color: var(--gray);
+        }
+
+        .trust-cta {
+            text-align: center;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* ==================== PARTNERS ==================== */
+        .partners {
+            position: relative;
+            padding: clamp(3rem, 8vw, 6.25rem) clamp(1.25rem, 5vw, 2.5rem);
+            overflow: hidden;
+            background: linear-gradient(180deg, var(--white) 0%, rgba(75, 231, 163, 0.05) 100%);
+        }
+
+        .partners .blob {
+            width: 400px;
+            height: 400px;
+            top: -100px;
+            right: -150px;
+        }
+
+        .partners-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 50px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .partner-card {
+            background: var(--white);
+            border-radius: 30px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.06);
+            transition: transform 0.3s ease;
+        }
+
+        .partner-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .partner-card h3 {
+            font-size: clamp(1.25rem, 3vw, 1.5rem);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .partner-card h3::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: var(--primary);
+            border-radius: 50%;
+        }
+
+        .partner-card p {
+            font-size: clamp(0.875rem, 1.5vw, 0.9375rem);
+            color: var(--gray);
+            line-height: 1.7;
+            margin-bottom: 24px;
+        }
+
+        .partner-logos {
+            display: flex;
+            gap: 16px;
+        }
+
+        .partners-cta {
+            text-align: center;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* ==================== ABOUT ==================== */
+        .about {
+            position: relative;
+            padding: clamp(2rem, 5vw, 3.125rem) clamp(1.25rem, 5vw, 2.5rem) clamp(3rem, 8vw, 6.25rem);
+            background: var(--white);
+            overflow: hidden;
+        }
+
+        .about .floating-circle {
+            width: 200px;
+            height: 200px;
+            top: 50px;
+            left: -80px;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        .about-content {
+            position: relative;
+            z-index: 10;
+            display: grid;
+            grid-template-columns: 1fr 320px;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .about-copy {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .about-copy h2 {
+            font-size: clamp(1.75rem, 5vw, 3rem);
+        }
+
+        .about-copy p {
+            font-size: clamp(1rem, 2vw, 1.0625rem);
+            color: var(--gray);
+            line-height: 1.8;
+        }
+
+        .about-image {
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+            transform: rotate(2deg);
+            transition: transform 0.4s ease;
+        }
+
+        .about-image:hover {
+            transform: rotate(0deg) scale(1.02);
+        }
+
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* ==================== HELP ==================== */
+        .help {
+            position: relative;
+            padding: clamp(3rem, 8vw, 6.25rem) clamp(1.25rem, 5vw, 2.5rem);
+            background: var(--light);
+            overflow: hidden;
+        }
+
+        .help::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='20' cy='20' r='1.5' fill='%2310BC7D' fill-opacity='0.1'/%3E%3C/svg%3E");
+            pointer-events: none;
+        }
+
+        .help-header {
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .help-header h2 {
+            font-size: clamp(1.75rem, 5vw, 3rem);
+        }
+
+        .help-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .help-card {
+            background: var(--white);
+            border-radius: 30px;
+            padding: 40px 30px;
+            text-align: center;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.06);
+            transition: transform 0.3s ease;
+        }
+
+        .help-card:hover {
+            transform: translateY(-8px) rotate(1deg);
+        }
+
+        .help-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .help-icon.reni {
+            background: var(--primary-light);
+        }
+
+        .help-icon.reni img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .help-icon.whatsapp {
+            background: #25D366;
+        }
+
+        .help-icon.email {
+            background: var(--dark);
+        }
+
+        .help-icon svg {
+            width: 36px;
+            height: 36px;
+            color: var(--white);
+        }
+
+        .help-card h3 {
+            font-size: clamp(1.125rem, 2.5vw, 1.375rem);
+            margin-bottom: 12px;
+        }
+
+        .help-card p {
+            font-size: 14px;
+            color: var(--gray);
+            line-height: 1.6;
+            margin-bottom: 24px;
+        }
+
+        .help-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 24px;
+            background: var(--light);
+            border-radius: 100px;
+            font-weight: 700;
+            font-size: 14px;
+            color: var(--dark);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .help-btn:hover {
+            background: var(--primary-light);
+        }
+
+        /* ==================== DOWNLOAD APP ==================== */
+        .download-app {
+            position: relative;
+            padding: clamp(3rem, 8vw, 6.25rem) clamp(1.25rem, 5vw, 2.5rem);
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            overflow: hidden;
+        }
+
+        .download-app::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -30%;
+            width: 600px;
+            height: 600px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+        }
+
+        .download-app::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: -20%;
+            width: 400px;
+            height: 400px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 50%;
+        }
+
+        .download-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            position: relative;
+            z-index: 10;
+        }
+
+        .download-content h2 {
+            font-size: clamp(1.75rem, 5vw, 3rem);
+            color: var(--dark);
+            margin-bottom: 20px;
+        }
+
+        .download-content p {
+            font-size: clamp(1rem, 2vw, 1.125rem);
+            color: var(--dark);
+            opacity: 0.8;
+            line-height: 1.7;
+            margin-bottom: 12px;
+        }
+
+        .download-content .platforms {
+            font-size: 14px;
+            color: var(--dark);
+            opacity: 0.7;
+            margin-bottom: 32px;
+        }
+
+        .store-buttons {
+            display: flex;
+            gap: 16px;
+        }
+
+        .store-btn {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 24px;
+            background: var(--dark);
+            border-radius: 14px;
+            text-decoration: none;
+            transition: transform 0.3s ease;
+        }
+
+        .store-btn:hover {
+            transform: translateY(-3px);
+        }
+
+        .store-btn svg {
+            width: 28px;
+            height: 28px;
+            color: var(--white);
+        }
+
+        .store-btn-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .store-btn-text span:first-child {
+            font-size: 10px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .store-btn-text span:last-child {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--white);
+        }
+
+        .download-visual {
+            display: flex;
+            justify-content: center;
+            position: relative;
+        }
+
+        .download-visual .phone-mockup {
+            transform: rotate(-5deg);
+            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.25);
+        }
+
+        .download-visual .phone-mockup:hover {
+            transform: rotate(0deg) translateY(-10px);
+        }
+
+        .download-visual .phone-screen {
+            width: 220px;
+            height: 440px;
+        }
+
+        .floating-badge {
+            position: absolute;
+            background: var(--white);
+            border-radius: 16px;
+            padding: 14px 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .floating-badge-1 {
+            top: 40px;
+            right: 20px;
+            animation: float 4s ease-in-out infinite;
+        }
+
+        .floating-badge-2 {
+            bottom: 60px;
+            left: 0;
+            animation: float 5s ease-in-out infinite reverse;
+        }
+
+        .badge-icon {
+            width: 36px;
+            height: 36px;
+            background: var(--primary-light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .badge-icon svg {
+            width: 18px;
+            height: 18px;
+            color: var(--dark);
+        }
+
+        .badge-text {
+            font-weight: 700;
+            font-size: 14px;
+            color: var(--dark);
+        }
+
+        /* ==================== FOOTER ==================== */
+        footer {
+            background: var(--dark);
+            padding: clamp(2.5rem, 6vw, 3.75rem) clamp(1.25rem, 5vw, 2.5rem) clamp(1.25rem, 3vw, 1.875rem);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-logo img {
+            height: 36px;
+            margin-bottom: 20px;
+        }
+
+        .footer-logo p {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.6);
+            line-height: 1.6;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+        }
+
+        .footer-links a {
+            text-decoration: none;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 15px;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-light);
+        }
+
+        .footer-social {
+            display: flex;
+            justify-content: flex-end;
+            gap: 16px;
+        }
+
+        .social-link {
+            width: 44px;
+            height: 44px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background: var(--primary-light);
+            transform: translateY(-3px);
+        }
+
+        .social-link svg {
+            width: 20px;
+            height: 20px;
+            color: var(--white);
+        }
+
+        .social-link:hover svg {
+            color: var(--dark);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-bottom p {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        /* Wave Shape */
+        .wave-shape {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 100px;
+            overflow: hidden;
+        }
+
+        .wave-shape svg {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 100px;
+        }
+
+        /* ==================== INLINE STYLE REPLACEMENTS ==================== */
+        .hero-cta {
+            margin-top: 36px;
+        }
+
+        .rentify-pay-tagline {
+            color: var(--primary-light);
+            font-size: clamp(1.125rem, 2.5vw, 1.375rem);
+        }
+
+        .rentify-pay-phone-screen {
+            width: 240px;
+            height: 480px;
+        }
+
+        .rewards-logos {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-bottom: 50px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .rewards-logo-item {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background: var(--white);
+            border: 1px solid #D1D5DB;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 8px;
+            color: #9CA3AF;
+            font-weight: 600;
+        }
+
+        /* ==================== MOBILE NAV ==================== */
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+            z-index: 1001;
+        }
+
+        .menu-toggle span {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background: var(--dark);
+            margin: 6px 0;
+            border-radius: 2px;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+
+        .menu-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 6px);
+        }
+
+        .menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -6px);
+        }
+
+        /* ==================== RESPONSIVE — 1024px ==================== */
+        @media (max-width: 1024px) {
+            .rewards-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .trust-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .help-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .featured-in-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .rentify-pay-grid {
+                gap: 40px;
+            }
+
+            .about-content {
+                gap: 40px;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr 1fr;
+                gap: 30px;
+            }
+
+            .footer-social {
+                justify-content: flex-start;
+                grid-column: 1 / -1;
+            }
+        }
+
+        /* ==================== RESPONSIVE — 768px ==================== */
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+
+            nav {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: rgba(255, 255, 255, 0.98);
+                backdrop-filter: blur(20px);
+                flex-direction: column;
+                padding: 20px clamp(1.25rem, 5vw, 2.5rem);
+                gap: 0;
+                border-bottom: 1px solid rgba(16, 188, 125, 0.1);
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            }
+
+            nav.active {
+                display: flex;
+            }
+
+            nav a {
+                padding: 14px 0;
+                font-size: 16px;
+                border-bottom: 1px solid var(--light);
+            }
+
+            nav a:last-child {
+                border-bottom: none;
+            }
+
+            .hero-with-image {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .hero-image-card {
+                order: -1;
+                max-width: 280px;
+                margin: 0 auto;
+                transform: rotate(0deg);
+            }
+
+            .hero-image-card img {
+                height: 320px;
+            }
+
+            .hero-phones .phone-mockup.left,
+            .hero-phones .phone-mockup.right {
+                display: none;
+            }
+
+            .hero-phones {
+                margin-top: 40px;
+            }
+
+            .rentify-pay-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .rentify-pay-visual {
+                order: -1;
+            }
+
+            .rentify-pay-phone-screen {
+                width: 200px;
+                height: 400px;
+            }
+
+            .path-panels {
+                grid-template-columns: 1fr;
+            }
+
+            .partners-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .about-image {
+                order: -1;
+                max-width: 280px;
+                margin: 0 auto;
+                transform: rotate(0deg);
+            }
+
+            .download-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+                text-align: center;
+            }
+
+            .download-visual {
+                order: -1;
+            }
+
+            .download-visual .phone-screen {
+                width: 180px;
+                height: 360px;
+            }
+
+            .store-buttons {
+                justify-content: center;
+            }
+
+            .featured-in-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .dot-pattern {
+                display: none !important;
+            }
+
+            .wave-divider,
+            .wave-shape {
+                height: 50px;
+            }
+
+            .wave-divider svg,
+            .wave-shape svg {
+                height: 50px;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 30px;
+            }
+
+            .footer-links {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 20px;
+            }
+
+            .footer-social {
+                justify-content: center;
+            }
+
+            .path-lifestyle-image img {
+                height: 200px;
+            }
+
+            .rewards-lifestyle-image img {
+                height: 200px;
+            }
+
+            .pay-card {
+                display: none;
+            }
+
+            .floating-badge {
+                display: none;
+            }
+        }
+
+        /* ==================== RESPONSIVE — 600px ==================== */
+        @media (max-width: 600px) {
+            .hero-highlights {
+                grid-template-columns: 1fr;
+            }
+
+            .rewards-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .trust-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .help-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .path-selector {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .footer-links {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .rewards-logo-item {
+                width: 48px;
+                height: 48px;
+                font-size: 7px;
+            }
+
+            .rewards-logos {
+                gap: 12px;
+            }
+
+            .path-panel {
+                padding: 24px;
+            }
+
+            .help-card {
+                padding: 30px 20px;
+            }
+
+            .partner-card {
+                padding: 28px;
+            }
+
+            .trust-card {
+                padding: 28px 20px;
+            }
+
+            .hero-phones .phone-mockup.center .phone-screen {
+                width: 200px;
+                height: 400px;
+            }
+
+            .phone-screen {
+                width: 160px;
+                height: 320px;
+            }
+
+            .store-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .store-btn {
+                width: 100%;
+                max-width: 220px;
+                justify-content: center;
+            }
+        }
+
+        /* ==================== RESPONSIVE — 375px ==================== */
+        @media (max-width: 375px) {
+            .highlight-item {
+                padding: 12px 14px;
+            }
+
+            .reward-card {
+                padding: 24px 16px;
+            }
+
+            .btn {
+                padding: 14px 28px;
+                font-size: 14px;
+            }
+
+            .hero-image-card img {
+                height: 260px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- HEADER -->
+    <header>
+        <div class="container">
+            <div class="header-inner">
+                <a href="#" class="logo">
+                    <img src="assets/logo-on-light.svg" alt="Rentify">
+                </a>
+                <button class="menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <nav>
+                    <a href="#top">Home</a>
+                    <a href="#how-it-works">How it Works</a>
+                    <a href="#rewards">Rewards</a>
+                    <a href="#why">Why</a>
+                    <a href="#help">Help</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- HERO -->
+    <section id="top" class="hero">
+        <div class="blob blob-green blob-1"></div>
+        <div class="blob blob-gray blob-2"></div>
+        <div class="floating-circle floating-circle-1"></div>
+        <div class="floating-circle floating-circle-2"></div>
+        <div class="floating-circle floating-circle-3"></div>
+        <div class="dot-pattern dot-pattern-1">
+            <span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+            <span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+            <span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+            <span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+        </div>
+        <div class="container">
+            <div class="hero-with-image">
+            <div class="hero-content">
+                <h1>Rent the Simple Way</h1>
+                <p class="hero-subhead">Monthly rent, rewards and secure transactions made simple</p>
+
+                <div class="hero-highlights">
+                    <div class="highlight-item">
+                        <div class="highlight-icon">
+                            <svg viewBox="0 0 1000 870" fill="currentColor"><path d="m88.3 1c0.4 0.6 2.6 3.3 4.7 5.9 15.3 18.2 26.8 47.8 33 85.1 4.1 24.5 4.3 32.2 4.3 125.6v87h-41.8c-38.2 0-42.6-0.2-50.1-1.7-11.8-2.5-24-9.2-32.2-17.8-6.5-6.9-6.3-7.3-5.9 13.6 0.5 17.3 0.7 19.2 3.2 28.6 4 14.9 9.5 26 17.8 35.9 11.3 13.6 22.8 21.2 39.2 26.3 3.5 1 10.9 1.4 37.1 1.6l32.7 0.5v43.3 43.4l-46.1-0.3-46.3-0.3-8-3.2c-9.5-3.8-13.8-6.6-23.1-14.9l-6.8-6.1 0.4 19.1c0.5 17.7 0.6 19.7 3.1 28.7 8.7 31.8 29.7 54.5 57.4 61.9 6.9 1.9 9.6 2 38.5 2.4l30.9 0.4v89.6c0 54.1-0.3 94-0.8 100.8-0.5 6.2-2.1 17.8-3.5 25.9-6.5 37.3-18.2 65.4-35 83.6l-3.4 3.7h169.1c101.1 0 176.7-0.4 187.8-0.9 19.5-1 63-5.3 72.8-7.4 3.1-0.6 8.9-1.5 12.7-2.1 8.1-1.2 21.5-4 40.8-8.9 27.2-6.8 52-15.3 76.3-26.1 7.6-3.4 29.4-14.5 35.2-18 3.1-1.8 6.8-4 8.2-4.7 3.9-2.1 10.4-6.3 19.9-13.1 4.7-3.4 9.4-6.7 10.4-7.4 4.2-2.8 18.7-14.9 25.3-21 25.1-23.1 46.1-48.8 62.4-76.3 2.3-4 5.3-9 6.6-11.1 3.3-5.6 16.9-33.6 18.2-37.8 0.6-1.9 1.4-3.9 1.8-4.3 2.6-3.4 17.6-50.6 19.4-60.9 0.6-3.3 0.9-3.8 3.4-4.3 1.6-0.3 24.9-0.3 51.8-0.1 53.8 0.4 53.8 0.4 65.7 5.9 6.7 3.1 8.7 4.5 16.1 11.2 9.7 8.7 8.8 10.1 8.2-11.7-0.4-12.8-0.9-20.7-1.8-23.9-3.4-12.3-4.2-14.9-7.2-21.1-9.8-21.4-26.2-36.7-47.2-44l-8.2-3-33.4-0.4-33.3-0.5 0.4-11.7c0.4-15.4 0.4-45.9-0.1-61.6l-0.4-12.6 44.6-0.2c38.2-0.2 45.3 0 49.5 1.1 12.6 3.5 21.1 8.3 31.5 17.8l5.8 5.4v-14.8c0-17.6-0.9-25.4-4.5-37-7.1-23.5-21.1-41-41.1-51.8-13-7-13.8-7.2-58.5-7.5-26.2-0.2-39.9-0.6-40.6-1.2-0.6-0.6-1.1-1.6-1.1-2.4 0-0.8-1.5-7.1-3.5-13.9-23.4-82.7-67.1-148.4-131-197.1-8.7-6.7-30-20.8-38.6-25.6-3.3-1.9-6.9-3.9-7.8-4.5-4.2-2.3-28.3-14.1-34.3-16.6-3.6-1.6-8.3-3.6-10.4-4.4-35.3-15.3-94.5-29.8-139.7-34.3-7.4-0.7-17.2-1.8-21.7-2.2-20.4-2.3-48.7-2.6-209.4-2.6-135.8 0-169.9 0.3-169.4 1zm330.7 43.3c33.8 2 54.6 4.6 78.9 10.5 74.2 17.6 126.4 54.8 164.3 117 3.5 5.8 18.3 36 20.5 42.1 10.5 28.3 15.6 45.1 20.1 67.3 1.1 5.4 2.6 12.6 3.3 16 0.7 3.3 1 6.4 0.7 6.7-0.5 0.4-100.9 0.6-223.3 0.5l-222.5-0.2-0.3-128.5c-0.1-70.6 0-129.3 0.3-130.4l0.4-1.9h71.1c39 0 78 0.4 86.5 0.9zm297.5 350.3c0.7 4.3 0.7 77.3 0 80.9l-0.6 2.7-227.5-0.2-227.4-0.3-0.2-42.4c-0.2-23.3 0-42.7 0.2-43.1 0.3-0.5 97.2-0.8 227.7-0.8h227.2zm-10.2 171.7c0.5 1.5-1.9 13.8-6.8 33.8-5.6 22.5-13.2 45.2-20.9 62-3.8 8.6-13.3 27.2-15.6 30.7-1.1 1.6-4.3 6.7-7.1 11.2-18 28.2-43.7 53.9-73 72.9-10.7 6.8-32.7 18.4-38.6 20.2-1.2 0.3-2.5 0.9-3 1.3-0.7 0.6-9.8 4-20.4 7.8-19.5 6.9-56.6 14.4-86.4 17.5-19.3 1.9-22.4 2-96.7 2h-76.9v-129.7-129.8l220.9-0.4c121.5-0.2 221.6-0.5 222.4-0.7 0.9-0.1 1.8 0.5 2.1 1.2z"/></svg>
+                        </div>
+                        <p>Monthly rent with secure payments and rewards</p>
+                    </div>
+                    <div class="highlight-item">
+                        <div class="highlight-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                        </div>
+                        <p>Create, renew and manage rental agreements</p>
+                    </div>
+                    <div class="highlight-item">
+                        <div class="highlight-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                        </div>
+                        <p>Instant receipts, reminders and support</p>
+                    </div>
+                    <div class="highlight-item">
+                        <div class="highlight-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                        </div>
+                        <p>Designed for tenants, landlords and agents</p>
+                    </div>
+                </div>
+
+                <a href="#download-app" class="btn hero-cta">Start Now</a>
+            </div>
+            <div class="hero-image-card">
+                <img src="https://images.pexels.com/photos/5711715/pexels-photo-5711715.jpeg?auto=compress&cs=tinysrgb&w=600&h=900&fit=crop" alt="Woman smiling while using phone on sofa at home">
+            </div>
+            </div>
+
+            <div class="hero-phones">
+                <div class="phone-mockup left">
+                    <div class="phone-screen"></div>
+                </div>
+                <div class="phone-mockup center">
+                    <div class="phone-screen"></div>
+                </div>
+                <div class="phone-mockup right">
+                    <div class="phone-screen"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- RENTIFY PAY -->
+    <section class="rentify-pay">
+        <div class="floating-circle fc-1"></div>
+        <div class="floating-circle fc-2"></div>
+        <div class="container">
+            <div class="rentify-pay-grid">
+                <div class="rentify-pay-content">
+                    <h2>Rent, On Your Own Terms</h2>
+                    <div class="powered-by">
+                        <h3>Powered by</h3>
+                        <img src="assets/rentify-pay-logo.svg" alt="Rentify Pay">
+                    </div>
+                    <p class="tagline">Rent is one of your biggest monthly commitments.</p>
+                    <p>The way we pay it should not feel stuck in the past.</p>
+                    <p>Rentify Pay is built to fit into real life whether you're paying rent, managing a property, or collecting payments.</p>
+                    <h3 class="rentify-pay-tagline">AI-powered Rent Payments and Rental Workflows</h3>
+                    <p>One platform to pay, manage, and track rent with intelligent automation, flexible options, and clear records.</p>
+                    <p>Making rent payments smoother, more transparent, and easier to manage for tenants and landlords.</p>
+                    <a href="#download-app" class="btn">Start Now</a>
+                </div>
+                <div class="rentify-pay-visual">
+                    <div class="phone-mockup">
+                        <div class="phone-screen rentify-pay-phone-screen"></div>
+                    </div>
+                    <div class="pay-card pay-card-1">
+                        <div class="pay-card-amount">4,500 AED</div>
+                        <div class="pay-card-label">Monthly payment</div>
+                    </div>
+                    <div class="pay-card pay-card-2">
+                        <div class="pay-card-amount">+250 pts</div>
+                        <div class="pay-card-label">Earned this month</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CUSTOM PATH -->
+    <section id="how-it-works" class="custom-path">
+        <div class="blob blob-green"></div>
+        <div class="dot-pattern">
+            <span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+            <span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+            <span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+            <span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+            <span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+            <span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+        </div>
+        <div class="container">
+            <div class="path-header">
+                <h2>Choose Your Journey</h2>
+                <div class="path-selector">
+                    <span>I am a:</span>
+                    <div class="selector-options">
+                        <div class="selector-option active">
+                            <span class="selector-label">Tenant</span>
+                        </div>
+                        <div class="selector-option">
+                            <span class="selector-label">Landlord</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="path-lifestyle-image">
+                <img src="https://images.pexels.com/photos/7641903/pexels-photo-7641903.jpeg?auto=compress&cs=tinysrgb&w=1200&h=800&fit=crop" alt="Happy couple holding keys to their new home">
+            </div>
+
+            <div class="path-panels">
+                <!-- Tenant Panel -->
+                <div class="path-panel">
+                    <div class="path-panel-header">
+                        <div class="path-panel-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                        </div>
+                        <h3>Tenant</h3>
+                    </div>
+
+                    <div class="looking-for">
+                        <h4>What are you looking for?</h4>
+                        <div class="option-list">
+                            <div class="option-item selected">
+
+                                A new apartment to pay monthly
+                            </div>
+                            <div class="option-item">
+
+                                Migrate existing rental to Rentify for monthly payments
+                            </div>
+                            <div class="option-item">
+
+                                Convert quarterly or bi-annual cheques to secure digital payments
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="how-it-works-mini">
+                        <h4>How it works</h4>
+                        <div class="steps-list">
+                            <div class="step-item">
+                                <div class="step-number">1</div>
+                                <div class="step-content">
+                                    <h5>Download and Sign Up</h5>
+                                    <p>Get the Rentify app and select Tenant.</p>
+                                </div>
+                            </div>
+                            <div class="step-item">
+                                <div class="step-number">2</div>
+                                <div class="step-content">
+                                    <h5>Submit Documents</h5>
+                                    <p>Upload: Emirates ID, Passport, Salary certificate, 3-month bank statement, 3 recent salary slips</p>
+                                </div>
+                            </div>
+                            <div class="step-item">
+                                <div class="step-number">3</div>
+                                <div class="step-content">
+                                    <h5>Get Approved</h5>
+                                    <p>Our banking partner reviews your application in 2-3 working days.</p>
+                                </div>
+                            </div>
+                            <div class="step-item">
+                                <div class="step-number">4</div>
+                                <div class="step-content">
+                                    <h5>Start Paying Monthly</h5>
+                                    <p>Once approved, we coordinate with your landlord. You're all set to pay rent monthly through the app. It's secure, simple, and stress-free.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bonus-card">
+                            <p>💰 Bonus: Earn rewards for every transaction</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Landlord Panel -->
+                <div class="path-panel">
+                    <div class="path-panel-header">
+                        <div class="path-panel-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                        </div>
+                        <h3>Landlord</h3>
+                    </div>
+
+                    <div class="why-rentify">
+                        <h4>Why Rentify?</h4>
+                        <p>Get paid upfront. Zero follow-ups. Full transparency.</p>
+                    </div>
+
+                    <div class="landlord-benefit">
+                        You receive the entire annual rent immediately—while your tenant pays monthly. No changes to your lease, no collection stress.
+                    </div>
+
+                    <div class="how-it-works-mini">
+                        <h4>How It Works</h4>
+                        <div class="steps-list">
+                            <div class="step-item">
+                                <div class="step-number">1</div>
+                                <div class="step-content">
+                                    <h5>Download and Register</h5>
+                                    <p>Sign up as a "Landlord" in the Rentify app.</p>
+                                </div>
+                            </div>
+                            <div class="step-item">
+                                <div class="step-number">2</div>
+                                <div class="step-content">
+                                    <h5>Add Property Details</h5>
+                                    <p>Provide: Emirates ID, Property listing, Title deed, IBAN details</p>
+                                </div>
+                            </div>
+                            <div class="step-item">
+                                <div class="step-number">3</div>
+                                <div class="step-content">
+                                    <h5>Verify Your Tenant</h5>
+                                    <p>Your tenant applies through Rentify with their tenancy agreement and Ejari.</p>
+                                </div>
+                            </div>
+                            <div class="step-item">
+                                <div class="step-number">4</div>
+                                <div class="step-content">
+                                    <h5>Get Paid in Full</h5>
+                                    <p>Our banking partner deposits the full annual rent directly to your account.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="done-message">
+                            Guaranteed rent. No chasing. No delays.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- REWARDS -->
+    <section id="rewards" class="rewards">
+        <div class="floating-circle floating-circle-1"></div>
+        <div class="floating-circle floating-circle-2"></div>
+        <div class="container">
+            <div class="rewards-header">
+                <h2>Rewards That Add Up</h2>
+                <p>Rent is your biggest monthly expense. It should give something back.</p>
+                <p>With Rentify, every rent payment earns you points that can be redeemed across everyday categories from shopping and dining to travel and services.</p>
+            </div>
+
+            <div class="rewards-lifestyle-image">
+                <img src="https://images.pexels.com/photos/5709522/pexels-photo-5709522.jpeg?auto=compress&cs=tinysrgb&w=1200&h=800" alt="Woman enjoying coffee at a bright cafe">
+            </div>
+
+            <div class="rewards-grid">
+                <div class="reward-card">
+                    <div class="reward-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+                    </div>
+                    <h4>Pay rent monthly</h4>
+                    <p>through Rentify</p>
+                </div>
+                <div class="reward-card">
+                    <div class="reward-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                    </div>
+                    <h4>Earn points</h4>
+                    <p>on every successful payment</p>
+                </div>
+                <div class="reward-card">
+                    <div class="reward-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                    </div>
+                    <h4>Redeem rewards</h4>
+                    <p>from 200+ partner brands</p>
+                </div>
+            </div>
+
+            <div class="rewards-logos">
+                <div class="rewards-logo-item">LOGO</div>
+                <div class="rewards-logo-item">LOGO</div>
+                <div class="rewards-logo-item">LOGO</div>
+                <div class="rewards-logo-item">LOGO</div>
+                <div class="rewards-logo-item">LOGO</div>
+            </div>
+
+            <div class="rewards-note">
+                <p>Rewards are built into the rental experience — no extra steps, no separate apps.</p>
+            </div>
+
+            <div class="rewards-cta">
+                <a href="#download-app" class="btn">Start Now</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FEATURED IN -->
+    <section class="featured-in">
+        <div class="container">
+            <div class="featured-in-header">
+                <h2>As Featured In</h2>
+                <p>We're honored to be <strong>Startup of the Year 2025</strong> at the Finance Middle East Awards 2025</p>
+            </div>
+            <div class="featured-in-grid">
+                <div class="featured-in-item">
+                    <img src="assets/featured-in-channels/gulf-business.webp" alt="Gulf Business">
+                </div>
+                <div class="featured-in-item">
+                    <img src="assets/featured-in-channels/gulf-news.png" alt="Gulf News">
+                </div>
+                <div class="featured-in-item">
+                    <img src="assets/featured-in-channels/wamda.png" alt="Wamda">
+                </div>
+                <div class="featured-in-item">
+                    <img src="assets/featured-in-channels/dubai-stars.png" alt="Dubai Stars">
+                </div>
+                <div class="featured-in-item">
+                    <img src="assets/featured-in-channels/top-150-finance-world.png" alt="Top 150 Real Estate Icons - Finance World Powerlist">
+                </div>
+                <div class="featured-in-item">
+                    <img src="assets/featured-in-channels/entrepreneur-me-tv.png" alt="Entrepreneur Middle East TV">
+                </div>
+                <div class="featured-in-item">
+                    <img src="assets/featured-in-channels/dubai-eye.png" alt="Dubai Eye 103.8">
+                </div>
+                <div class="featured-in-item">
+                    <img src="assets/featured-in-channels/emirates-loves-india.png" alt="Emirates Loves India">
+                </div>
+                <div class="featured-in-item">
+                    <img src="assets/featured-in-channels/talk-100.png" alt="Talk 100.3">
+                </div>
+                <div class="featured-in-item">
+                    <img src="assets/featured-in-channels/date-with-tech.png" alt="Date with Tech Podcast">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TRUST CENTRE -->
+    <section id="why" class="trust-centre">
+        <div class="container">
+            <div class="trust-grid">
+                <div class="trust-card">
+                    <h3>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                        Security
+                    </h3>
+                    <p>Your data and payments are protected with industry-standard security and encryption.</p>
+                    <div class="logo-placeholders">
+                        <div class="logo-placeholder">Logo</div>
+                        <div class="logo-placeholder">Logo</div>
+                    </div>
+                </div>
+                <div class="trust-card">
+                    <h3>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                        Compliance and Data Privacy
+                    </h3>
+                    <p>We follow local regulations and strict privacy practices to protect your information.</p>
+                </div>
+                <div class="trust-card">
+                    <h3>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                        Insurance and Risk
+                    </h3>
+                    <p>Built-in safeguards help protect both tenants and landlords across the rental lifecycle.</p>
+                </div>
+            </div>
+            <div class="trust-cta">
+                <a href="#download-app" class="btn">Start Now</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- PARTNERS -->
+    <section class="partners">
+        <div class="blob blob-green"></div>
+        <div class="container">
+            <div class="partners-grid">
+                <div class="partner-card">
+                    <h3>Banking & Payments</h3>
+                    <p>Integrated with leading banking and payment partners to support smooth, secure monthly transactions.</p>
+                    <div class="partner-logos">
+                        <div class="logo-placeholder">Logo</div>
+                        <div class="logo-placeholder">Logo</div>
+                        <div class="logo-placeholder">Logo</div>
+                    </div>
+                </div>
+                <div class="partner-card">
+                    <h3>Ecosystem Benefits</h3>
+                    <p>Access value-added services such as registrations, agreements, digital tools, and reward programmes that support the entire rental cycle.</p>
+                </div>
+            </div>
+            <div class="partners-cta">
+                <a href="#download-app" class="btn">Start Now</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="about">
+        <div class="floating-circle"></div>
+        <div class="container">
+            <div class="about-content">
+                <div class="about-copy">
+                    <h2>Our Story</h2>
+                    <p>Rentify was built to make renting simpler by replacing fragmented, outdated systems with a secure digital foundation.</p>
+                    <p>We enable monthly rent payments, online agreements, built-in rewards, and fast settlements — creating modern infrastructure for renting at scale.</p>
+                </div>
+                <div class="about-image">
+                    <img src="assets/about-founders.jpg" alt="Rentify Founders">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- HELP -->
+    <section id="help" class="help">
+        <div class="container">
+            <div class="help-header">
+                <h2>We're Always Here for You</h2>
+            </div>
+            <div class="help-grid">
+                <div class="help-card">
+                    <div class="help-icon reni">
+                        <img src="assets/reni-avatar.png" alt="Reni">
+                    </div>
+                    <h3>Ask Reni</h3>
+                    <p>Your virtual assistant for rent-related questions. Available anytime.</p>
+                    <a href="#" class="help-btn">Chat with Reni</a>
+                </div>
+                <div class="help-card">
+                    <div class="help-icon whatsapp">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                    </div>
+                    <h3>WhatsApp</h3>
+                    <p>Chat instantly with our support team.</p>
+                    <a href="#" class="help-btn">Open WhatsApp</a>
+                </div>
+                <div class="help-card">
+                    <div class="help-icon email">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                    </div>
+                    <h3>Email</h3>
+                    <p>Reach out for detailed or account-specific support.</p>
+                    <a href="#" class="help-btn">Send Email</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- DOWNLOAD APP -->
+    <section id="download-app" class="download-app">
+        <div class="container">
+            <div class="download-grid">
+                <div class="download-content">
+                    <h2>Get Started Now</h2>
+                    <p>Manage your rent, agreements, rewards, and support — all in one place.</p>
+                    <p class="platforms">Available on iOS and Android.</p>
+                    <div class="store-buttons">
+                        <a href="#" class="store-btn">
+                            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+                            <div class="store-btn-text">
+                                <span>Download on the</span>
+                                <span>App Store</span>
+                            </div>
+                        </a>
+                        <a href="#" class="store-btn">
+                            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.6 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 20.53,12.9 20.18,13.18L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z"/></svg>
+                            <div class="store-btn-text">
+                                <span>GET IT ON</span>
+                                <span>Google Play</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="download-visual">
+                    <div class="phone-mockup">
+                        <div class="phone-screen"></div>
+                    </div>
+                    <div class="floating-badge floating-badge-1">
+                        <div class="badge-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                        </div>
+                        <span class="badge-text">Secure</span>
+                    </div>
+                    <div class="floating-badge floating-badge-2">
+                        <div class="badge-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                        </div>
+                        <span class="badge-text">Rewards</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="assets/logo-on-dark.svg" alt="Rentify">
+                    <p>Rent the simple way.</p>
+                </div>
+                <div class="footer-links">
+                    <a href="#top">Home</a>
+                    <a href="#how-it-works">How it Works</a>
+                    <a href="#rewards">Rewards</a>
+                    <a href="#why">Why</a>
+                    <a href="#help">Help</a>
+                </div>
+                <div class="footer-social">
+                    <a href="#" class="social-link">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                    </a>
+                    <a href="#" class="social-link">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                    </a>
+                    <a href="#" class="social-link">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                    </a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Rentify. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    <script>
+    // Mobile nav toggle
+    const menuToggle = document.querySelector('.menu-toggle');
+    const nav = document.querySelector('nav');
+
+    menuToggle.addEventListener('click', () => {
+        const isOpen = nav.classList.toggle('active');
+        menuToggle.classList.toggle('active');
+        menuToggle.setAttribute('aria-expanded', isOpen);
+    });
+
+    // Close nav on link click
+    nav.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+            nav.classList.remove('active');
+            menuToggle.classList.remove('active');
+            menuToggle.setAttribute('aria-expanded', 'false');
+        });
+    });
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', (e) => {
+            const target = document.querySelector(anchor.getAttribute('href'));
+            if (target) {
+                e.preventDefault();
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        });
+    });
+    </script>
+</body>
+</html>
